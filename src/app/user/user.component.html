@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div class="h2">Posts</div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+            Post</button>
+    </div>
+    <!-- (click)="addPost()" -->
+    <div class="row justify-content-center">
+        <div *ngFor="let post of posts" class="col-sm-6 my-2">
+            <div class="card text-bg-dark ">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body }}</p>
+                    <a routerLink="/post/{{ post.id }}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="h2">Albums</div>
+    <div class="list-group">
+        <a *ngFor="let album of albums" routerLink="/album/{{ album.id }}"
+            class="list-group-item list-group-item-action list-group-item-dark">{{album.title}}</a>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="newPostData" (ngSubmit)="addPost(newPostData.value)" class="modal-body">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" formControlName="title" class="form-control" id="title">
+                    <small *ngIf="newPostData.get('title')?.errors" class="text-danger">Please provide a title</small>
+                </div>
+                <div class="mb-3">
+                    <label for="body" class="form-label">Body</label>
+                    <textarea class="form-control" name="body" formControlName="body" id="body" rows="3"></textarea>
+                    <div *ngIf="newPostData.get('body')?.errors" class="text-danger">Please provide a body</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

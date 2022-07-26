@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="h2 m-2 text-center">Album No: {{ id }}</div>
+    <div class="row">
+        <div  *ngFor="let photo of photos" class="col-4">
+            <div class="card m-2">
+                <img src="{{ photo.url }}" class="card-img-top" alt="{{ photo.title }}">
+                <div class="card-body">
+                    <p class="card-text">{{ photo.title }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
